@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/py-radicz/aoc25/dayone"
+	"github.com/py-radicz/aoc25/daytwo"
+	"github.com/py-radicz/aoc25/utils"
 )
 
 func main() {
-	part1, part2 := dayone.DayOne()
-	fmt.Printf("Day 1\n======\npart1: %d, part2: %d\n", part1, part2)
+	p := utils.NewPuzzle(2, daytwo.DayTwo)
+	p.Run()
+	fmt.Printf("%+v\n", p)
 }

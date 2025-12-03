@@ -2,12 +2,11 @@
 package dayone
 
 import (
+	"bytes"
 	"log"
 
 	"github.com/py-radicz/aoc25/utils"
 )
-
-const day = 1
 
 type Rotation struct {
 	Dir byte
@@ -56,8 +55,8 @@ func NewLock(start int) *Lock {
 	return &Lock{dial: start}
 }
 
-func Rotations() (rots []Rotation) {
-	//in := [][]byte{
+func Rotations(in []byte) (rots []Rotation) {
+	//input := [][]byte{
 	//	[]byte("L68"),
 	//	[]byte("L30"),
 	//	[]byte("R48"),
@@ -69,21 +68,22 @@ func Rotations() (rots []Rotation) {
 	//	[]byte("R14"),
 	//	[]byte("L82"),
 	//}
-	in, err := utils.GetInput(day)
-	if err != nil {
-		log.Fatal(err)
-	}
+	input := bytes.Fields(in)
 
-	for _, rot := range in {
+	for _, rot := range input {
 		num := utils.AtoiBytes(rot[1:])
 		rots = append(rots, Rotation{Dir: rot[0], Num: num})
 	}
 	return
 }
 
-func DayOne() (partOne, partTwo int) {
+func DayOne(day int) (partOne, partTwo int) {
 	lock := NewLock(50)
-	for _, rot := range Rotations() {
+	in, err := utils.GetInput(day)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, rot := range Rotations(in) {
 		switch rot.Dir {
 		case 'R':
 			lock.Right(rot.Num)
@@ -97,5 +97,5 @@ func DayOne() (partOne, partTwo int) {
 	}
 
 	partTwo = lock.transitions
-	return partOne, partTwo
+	return
 }

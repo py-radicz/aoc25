@@ -9,11 +9,29 @@ import (
 	"os"
 )
 
-const (
-	year = 2025
-)
+const year = 2025
 
-func GetInput(day int) ([][]byte, error) {
+type Puzzle struct {
+	Func  func(int) (int, int)
+	Day   int
+	Part1 int
+	Part2 int
+}
+
+func (p *Puzzle) Run() {
+	p1, p2 := p.Func(p.Day)
+	p.Part1, p.Part2 = p1, p2
+}
+
+func (p *Puzzle) String() string {
+	return fmt.Sprintf("Day: %d, Part1: %d, Part2: %d", p.Day, p.Part1, p.Part2)
+}
+
+func NewPuzzle(day int, f func(int) (int, int)) *Puzzle {
+	return &Puzzle{Func: f, Day: day, Part1: 0, Part2: 0}
+}
+
+func GetInput(day int) ([]byte, error) {
 	url := fmt.Sprintf("https://adventofcode.com/%d/day/%d/input", year, day)
 
 	client := &http.Client{}
@@ -33,11 +51,7 @@ func GetInput(day int) ([][]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return bytes.Fields(bodyText), nil
-}
-
-func Divmod(numerator, denominator int) (quotient, remainder int) {
-	return numerator / denominator, numerator % denominator
+	return bytes.Trim(bodyText, " \n\r"), nil
 }
 
 func AtoiBytes(b []byte) int {
