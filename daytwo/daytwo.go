@@ -16,7 +16,7 @@ type Range struct {
 }
 
 func IsInvalid(id string, partition int) bool {
-	parts := make(map[string]struct{}, partition)
+	parts := make(map[string]struct{}, int(len(id)/partition))
 
 	for chunk := range slices.Chunk([]byte(id), partition) {
 		parts[string(chunk)] = struct{}{}
