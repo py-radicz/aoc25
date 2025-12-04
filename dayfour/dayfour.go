@@ -41,8 +41,13 @@ func RemoveRolls(grid [][]rune) int {
 			}
 
 			if i != 0 && j != 0 && i != len(grid)-1 && j != len(r)-1 {
-				neighbours := string(grid[i-1][j-1:j+2]) + string(grid[i+1][j-1:j+2]) + string(grid[i][j-1]) + string(grid[i][j+1])
-				if strings.Count(neighbours, "@") < 4 {
+				var b strings.Builder
+				b.WriteString(string(grid[i-1][j-1 : j+2])) // top
+				b.WriteString(string(grid[i+1][j-1 : j+2])) // bottom
+				b.WriteString(string(grid[i][j-1]))         // left
+				b.WriteString(string(grid[i][j+1]))         // right
+
+				if strings.Count(b.String(), "@") < 4 {
 					removed = append(removed, Position{i, j})
 				}
 			}
