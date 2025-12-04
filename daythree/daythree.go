@@ -8,19 +8,6 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
-func MaxPos(battery string) (int, byte) {
-	max := '0'
-	maxIdx := -1
-
-	for i := 0; i < len(battery); i++ {
-		if rune(battery[i]) > max {
-			max = rune(battery[i])
-			maxIdx = i
-		}
-	}
-	return maxIdx, battery[maxIdx]
-}
-
 func MaxJoltage(s string, k int) string {
 	if len(s) == 0 || k == 0 || k > len(s) {
 		return ""
