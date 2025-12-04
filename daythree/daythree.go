@@ -34,24 +34,9 @@ func DayThree(day int) (partOne, partTwo int) {
 		log.Fatalf("failed to load Input for day: %d, %s", day, err)
 	}
 
-	// part one
 	for _, b := range strings.Fields(string(in)) {
-		mj := MaxJoltage(b, 2)
-		num := 0
-		for _, ch := range mj {
-			num = num*10 + int(ch-'0')
-		}
-		partOne += num
-	}
-
-	// part two
-	for _, b := range strings.Fields(string(in)) {
-		mj := MaxJoltage(b, 12)
-		num := 0
-		for _, ch := range mj {
-			num = num*10 + int(ch-'0')
-		}
-		partTwo += num
+		partOne += utils.AtoiBytes([]byte(MaxJoltage(b, 2)))
+		partTwo += utils.AtoiBytes([]byte(MaxJoltage(b, 12)))
 	}
 
 	return
