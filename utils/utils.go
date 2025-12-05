@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 )
 
 const year = 2025
@@ -19,8 +20,10 @@ type Puzzle struct {
 }
 
 func (p *Puzzle) Run() {
+	start := time.Now()
 	p1, p2 := p.Func(p.Day)
 	p.Part1, p.Part2 = p1, p2
+	fmt.Println("Total execution in: ", time.Since(start))
 }
 
 func (p *Puzzle) String() string {
@@ -32,6 +35,7 @@ func NewPuzzle(day int, f func(int) (int, int)) *Puzzle {
 }
 
 func GetInput(day int) ([]byte, error) {
+	start := time.Now()
 	url := fmt.Sprintf("https://adventofcode.com/%d/day/%d/input", year, day)
 
 	client := &http.Client{}
@@ -51,6 +55,7 @@ func GetInput(day int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("Input loaded in: ", time.Since(start))
 	return bytes.Trim(bodyText, " \n\r"), nil
 }
 
