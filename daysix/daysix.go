@@ -11,6 +11,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 6
+
 //var in string = `123 328  51 64
 // 45 64  387 23
 //  6 98  215 314
@@ -112,7 +114,7 @@ func ParseFormulas(rows []string, cols []int) []Formula {
 	return formulas
 }
 
-func DaySix(day int) (partOne, partTwo int) {
+func DaySix() (partOne, partTwo int) {
 	in, err := utils.GetInput(day)
 	if err != nil {
 		log.Fatalf("failed to load input for day %d", day)

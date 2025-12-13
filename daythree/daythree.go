@@ -8,6 +8,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 3
+
 func MaxJoltage(s string, k int) string {
 	if len(s) == 0 || k == 0 || k > len(s) {
 		return ""
@@ -24,7 +26,7 @@ func MaxJoltage(s string, k int) string {
 	return string(s[bestIdx]) + MaxJoltage(s[bestIdx+1:], k-1)
 }
 
-func DayThree(day int) (partOne, partTwo int) {
+func DayThree() (partOne, partTwo int) {
 	// in := `987654321111111
 	// 811111111111119
 	// 234234234234278

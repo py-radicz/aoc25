@@ -10,6 +10,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 5
+
 type Range struct {
 	first int
 	last  int
@@ -73,7 +75,7 @@ func ParseInput(in string) (ranges []Range, ingredients []int) {
 	return
 }
 
-func DayFive(day int) (partOne, partTwo int) {
+func DayFive() (partOne, partTwo int) {
 	//in := `3-5
 	//10-14
 	//16-20

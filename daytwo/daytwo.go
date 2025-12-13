@@ -10,6 +10,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 2
+
 type Range struct {
 	first int
 	last  int
@@ -32,7 +34,7 @@ func GetRanges(input []byte) (res []Range) {
 	return
 }
 
-func DayTwo(day int) (partOne, partTwo int) {
+func DayTwo() (partOne, partTwo int) {
 	// in := []byte(`11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124`)
 	in, err := utils.GetInput(day)
 	if err != nil {

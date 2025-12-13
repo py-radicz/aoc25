@@ -8,6 +8,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 1
+
 type Rotation struct {
 	Dir byte
 	Num int
@@ -77,7 +79,7 @@ func Rotations(in []byte) (rots []Rotation) {
 	return
 }
 
-func DayOne(day int) (partOne, partTwo int) {
+func DayOne() (partOne, partTwo int) {
 	lock := NewLock(50)
 	in, err := utils.GetInput(day)
 	if err != nil {

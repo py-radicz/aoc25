@@ -9,6 +9,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 7
+
 //var in []byte = []byte(`.......S.......
 //...............
 //.......^.......
@@ -26,7 +28,7 @@ import (
 //.^.^.^.^.^...^.
 //...............`)
 
-func DaySeven(day int) (partOne, partTwo int) {
+func DaySeven() (partOne, partTwo int) {
 	in, err := utils.GetInput(day)
 	if err != nil {
 		log.Fatalf("failed to load input for day %d", day)

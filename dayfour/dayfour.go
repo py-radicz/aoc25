@@ -8,6 +8,8 @@ import (
 	"github.com/py-radicz/aoc25/utils"
 )
 
+const day int = 4
+
 func EnhanceInput(lines []string) [][]rune {
 	// adds border so I am never out of index
 	cols := len(lines[0])
@@ -61,7 +63,7 @@ func RemoveRolls(grid [][]rune) int {
 	return len(removed)
 }
 
-func DayFour(day int) (partOne, partTwo int) {
+func DayFour() (partOne, partTwo int) {
 	// in := `..@@.@@@@.
 	//    @@@.@.@.@@
 	//    @@@@@.@.@@
