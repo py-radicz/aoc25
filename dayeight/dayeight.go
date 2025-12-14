@@ -8,6 +8,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/py-radicz/aoc25/utils"
 )
 
 const day int = 8
@@ -93,9 +95,28 @@ func ConnectPairs(in string, maxPairs int) int {
 	circuitID := 1
 
 	for i := range len(pairs) {
+		// partOne
 		if i == maxPairs {
-			break
+			results := make(map[int]int)
+			for _, p := range points {
+				if p.circuit == 0 {
+					continue
+				}
+				results[p.circuit]++
+			}
+			circuitLens := slices.Collect(maps.Values(results))
+			sort.Slice(circuitLens, func(i, j int) bool {
+				return circuitLens[i] > circuitLens[j]
+			})
+
+			return circuitLens[0] * circuitLens[1] * circuitLens[2]
 		}
+
+		// part Two
+		if i != 0 && CircuitFullyMerged(points) {
+			return pairs[i-1].p1.x * pairs[i-1].p2.x
+		}
+
 		pair := pairs[i]
 
 		// brand new circuit
@@ -124,32 +145,29 @@ func ConnectPairs(in string, maxPairs int) int {
 
 		}
 	}
+	return 0
+}
 
-	// partOne
-	results := make(map[int]int)
-	for _, p := range points {
-		if p.circuit == 0 {
-			continue
+func CircuitFullyMerged(points []*Point) bool {
+	merged := true
+	c := points[0].circuit
+	for _, p := range points[1:] {
+		if p.circuit != c {
+			merged = false
 		}
-		results[p.circuit]++
 	}
-	circuitLens := slices.Collect(maps.Values(results))
-	sort.Slice(circuitLens, func(i, j int) bool {
-		return circuitLens[i] > circuitLens[j]
-	})
-
-	return circuitLens[0] * circuitLens[1] * circuitLens[2]
+	return merged
 }
 
 func DayEight() (partOne, partTwo int) {
-	//input, err := utils.GetInput(day)
-	//if err != nil {
-	//	log.Fatalf("failed to load input for day %d", day)
-	//}
-	//in := string(input)
+	input, err := utils.GetInput(day)
+	if err != nil {
+		log.Fatalf("failed to load input for day %d", day)
+	}
+	in := string(input)
 
-	partOne = ConnectPairs(in, 10)
-	// partTwo = ConnectPairs(in, -1)
+	partOne = ConnectPairs(in, 1000)
+	partTwo = ConnectPairs(in, -1)
 
 	return
 }
